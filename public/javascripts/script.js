@@ -1,10 +1,12 @@
 $(function() {
-
     var sound = new Audio('http://www.recordmp3.org/gRs2S.mp3');
     var sound2 = new Audio('http://www.recordmp3.org/gR52T.mp3');
 
     var socket = io.connect(window.location.hostname);
     socket.on('data', function(data) {
+        if (typeof data == 'string' || data instanceof String){
+            var data = data.replace(/(^|\s)@(\w+)/g, "");
+        }
         $('.tweets').fadeOut(500);
         $('.tweets').empty();
         $('.tweets').append(data);
