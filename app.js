@@ -17,7 +17,7 @@ var server = http.createServer(app);
 
 
 // Twitter symbols array
-var watchSymbols = ['$msft', '$intc', '$hpq', '$goog', '$nok', '$nvda', '$bac', '$orcl', '$csco', '$aapl', '$ntap', '$emc', '$t', '$ibm', '$vz', '$xom', '$cvx', '$ge', '$ko', '$jnj'];
+var watchSymbols = ['so lonely'];
 
 //This structure will keep the total number of tweets received and a map of all the symbols and how many tweets received of that symbol
 var watchList = {
@@ -63,7 +63,7 @@ sockets.configure(function() {
 });
 
 //If the client just connected, give them fresh data!
-sockets.sockets.on('connection', function(socket) { 
+sockets.sockets.on('connection', function(socket) {
     socket.emit('data', watchList);
 });
 
@@ -72,13 +72,13 @@ sockets.sockets.on('connection', function(socket) {
 //since it will instantiate a connection on my behalf and will drop all other streaming connections.
 //Check out: https://dev.twitter.com/
 var t = new twitter({
-    consumer_key: '',           // <--- FILL ME IN
-    consumer_secret: '',        // <--- FILL ME IN
-    access_token_key: '',       // <--- FILL ME IN
-    access_token_secret: ''     // <--- FILL ME IN
+    consumer_key: 'SQLdvbhA3SaJnClplTo7Qg',           // <--- FILL ME IN
+    consumer_secret: 'tK5aAUuuHt1LImaG2a4py8Tz7bRoPi0ZXPRB8agiqU',        // <--- FILL ME IN
+    access_token_key: '217197507-dJXLVSEbkcuAsPic82QeV1Oqu5RB6k66ak6UiUJ5',       // <--- FILL ME IN
+    access_token_secret: 'JESq1j4pxAl6XszxLqDPFONhydImche5c8BIzFGF5kb3Q'     // <--- FILL ME IN
 });
 
-// //Tell the twitter API to filter on the watchSymbols 
+// //Tell the twitter API to filter on the watchSymbols
 t.stream('statuses/filter', { track: watchSymbols }, function(stream) {
 
   //We have a connection. Now watch the 'data' event for incomming tweets.
@@ -95,6 +95,7 @@ t.stream('statuses/filter', { track: watchSymbols }, function(stream) {
 
       //We're gunna do some indexOf comparisons and we want it to be case agnostic.
       var text = tweet.text.toLowerCase();
+      // console.log(text);
 
       //Go through every symbol and see if it was mentioned. If so, increment its counter and
       //set the 'claimed' variable to true to indicate something was mentioned so we can increment
@@ -112,7 +113,7 @@ t.stream('statuses/filter', { track: watchSymbols }, function(stream) {
           watchList.total++;
 
           //Send to all the clients
-          sockets.sockets.emit('data', watchList);
+          sockets.sockets.emit('data', text);
       }
     }
   });
