@@ -4,20 +4,23 @@ html
         title Node.js, Twitter Stream, Socket.io
         link(rel='stylesheet', href='/stylesheets/style.css')
         script(src="http://code.jquery.com/jquery-1.9.1.min.js")
+        script(type="text/javascript" src="/javascripts/jquery.jplayer.min.js")
         script(src="components/socket.io-client/dist/socket.io.min.js")
         script(src="/javascripts/mespeak.js")
         script(type='text/javascript').
             meSpeak.loadConfig("/javascripts/mespeak_config.json");
             meSpeak.loadVoice("/javascripts/voices/en/en.json");
-        script(src="/javascripts/script.js")
+         script(src="/javascripts/script.js")
 
     body
         .container
             .header
                 h1 All The Lonely People
             .tweets
-
-            button(onclick="meSpeak.speak('hello');") Click Me
+            #jquery_jplayer_1"
+        br
+        br
+    img(src="http://minimalistmama.files.wordpress.com/2011/11/sad_face.png")
 
 
 
