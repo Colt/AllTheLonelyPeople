@@ -20,19 +20,20 @@ $(function() {
                 });
     var socket = io.connect(window.location.hostname);
     socket.on('data', function(data) {
-        if (typeof data == 'string' || data instanceof String){
+        if (typeof data === 'string' || data instanceof String){
+            var tweet = data.replace(/(^|\s)@(\w+)/g, "REMOVED USERNAME");
+
             number = Math.random();
             if (last == -1){
-                meSpeak.speak(data,{pitch: 75, variant: "m1"});
+                meSpeak.speak(tweet,{pitch: 75, variant: "m1"});
             }
             if (last == 1){
-                meSpeak.speak(data,{speed: 130, variant: "f1"});
+                meSpeak.speak(tweet,{speed: 130, variant: "f1"});
             }
 
-            var data = data.replace(/(^|\s)@(\w+)/g, "");
             $('.tweets').fadeOut(500);
             $('.tweets').empty();
-            $('.tweets').append(data);
+            $('.tweets').append(tweet);
             $('.tweets').fadeIn(500);
             // document.body.style.background=bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]
             last = last * -1;
