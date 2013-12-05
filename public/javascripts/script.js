@@ -1,4 +1,5 @@
 $(function() {
+    var last = 1;
     var sound = new Audio('http://www.recordmp3.org/gRs2S.mp3');
     var sound2 = new Audio('http://www.recordmp3.org/gR52T.mp3');
     var bgcolorlist=new Array("#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#f1c40f", "#e67e22", "#e74c3c", "#95a5a6")
@@ -20,13 +21,21 @@ $(function() {
     var socket = io.connect(window.location.hostname);
     socket.on('data', function(data) {
         if (typeof data == 'string' || data instanceof String){
+            number = Math.random();
+            if (last == -1){
+                meSpeak.speak(data,{pitch: 75, variant: "m1"});
+            }
+            if (last == 1){
+                meSpeak.speak(data,{speed: 130, variant: "f1"});
+            }
+
             var data = data.replace(/(^|\s)@(\w+)/g, "");
-            meSpeak.speak(data,{speed: 130, variant: "m1"});
             $('.tweets').fadeOut(500);
             $('.tweets').empty();
             $('.tweets').append(data);
             $('.tweets').fadeIn(500);
             // document.body.style.background=bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]
+            last = last * -1;
 
         }
 
