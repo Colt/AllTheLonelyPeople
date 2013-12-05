@@ -1,12 +1,10 @@
 body {
   color: #333;
+  background-color: #f4f7f7;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1.7em;
   line-height: 1.4em;
   text-align: center;
-}
-img {
-  position: relative;
 }
 .header h1 {
   text-align: center;

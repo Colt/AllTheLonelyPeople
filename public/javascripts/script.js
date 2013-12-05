@@ -26,7 +26,8 @@ $(function() {
             $('.tweets').empty();
             $('.tweets').append(data);
             $('.tweets').fadeIn(500);
-            document.body.style.background=bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]
+            // document.body.style.background=bgcolorlist[Math.floor(Math.random()*bgcolorlist.length)]
+
         }
 
 
