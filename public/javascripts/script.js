@@ -21,7 +21,7 @@ $(function() {
     var socket = io.connect(window.location.hostname);
     socket.on('data', function(data) {
         if (typeof data === 'string' || data instanceof String){
-            var tweet = data.replace(/(^|\s)@(\w+)/g, "REMOVED USERNAME");
+            var tweet = data.replace(/@(\w+)/g, " ");
 
             number = Math.random();
             if (last == -1){
